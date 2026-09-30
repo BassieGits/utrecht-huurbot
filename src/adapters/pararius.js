@@ -9,6 +9,12 @@ async function fetchListings(page, url) {
   }
   await page.waitForTimeout(1000);
 
+  if ((await page.$$('li.search-list__item--listing')).length === 0) {
+    const title = await page.title().catch(() => '?');
+    const h1 = await page.textContent('h1').catch(() => null);
+    console.warn(`Pararius: geen woningen op pagina (titel: "${title}", h1: "${(h1 || '').replace(/\s+/g, ' ').trim()}")`);
+  }
+
   return page.$$eval('li.search-list__item--listing', (items) =>
     items
       .map((li) => {
