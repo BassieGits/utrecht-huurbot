@@ -3,5 +3,10 @@
     "name": "Utrecht tot 1000, vanaf 14 m2",
     "site": "pararius",
     "url": "https://www.pararius.nl/huurwoningen/utrecht/0-1000/14m2"
+  },
+  {
+    "name": "Van der Huizen Utrecht tot 1000",
+    "site": "vanderhuizen",
+    "url": "https://www.vanderhuizen.com/huurwoningen?city[]=utrecht-1&price_to=1000"
   }
 ]
