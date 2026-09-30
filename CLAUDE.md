@@ -1,6 +1,6 @@
 # Projectcontext voor Claude Code
 
-Persoonlijke notifier die huurwoningen in Utrecht zoekt voor een familielid en via Telegram meldt. Node 22, Playwright (Chromium), geen andere frameworks. Draait via GitHub Actions elk kwartier; state staat in `state/seen.json` en wordt door de workflow gecommit.
+Persoonlijke notifier die huurwoningen in Utrecht zoekt voor een familielid en via Telegram meldt. Node 22, Playwright (Chromium), geen andere frameworks. Draait via GitHub Actions elke 5 minuten (openbare repo, minuten gratis); state staat in `state/seen.json` en wordt door de workflow gecommit.
 
 ## Structuur
 - `src/index.js`: hoofdrun; loopt alle zoekopdrachten uit `config.json` af, vergelijkt met state, stuurt meldingen.

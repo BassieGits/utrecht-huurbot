@@ -2,9 +2,10 @@ name: Check huurwoningen
 
 on:
   schedule:
-    # Elk kwartier (op minuut 7, 22, 37, 52). Vaker kost snel meer Actions-minuten
-    # dan een gratis account voor een private repo heeft.
-    - cron: '7,22,37,52 * * * *'
+    # Elke 5 minuten (minuut 2, 7, 12, ...; niet op het hele uur, dan is GitHub het drukst).
+    # De repo is openbaar, dus Actions-minuten zijn gratis. GitHub voert geplande runs
+    # bij drukte vaak later of niet uit; in de praktijk zijn het er minder dan 288 per dag.
+    - cron: '2-59/5 * * * *'
   workflow_dispatch: {}
 
 permissions:

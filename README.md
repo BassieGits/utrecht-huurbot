@@ -2,7 +2,7 @@
 
 Checkt periodiek Pararius (en eventueel Utrechtse verhuurmakelaars) op nieuwe huurwoningen in Utrecht en stuurt een Telegram-melding zodra er eentje verschijnt. Elke melding vermeldt de bron.
 
-Gebaseerd op [wegjeroen/parari_bot](https://github.com/wegjeroen/parari_bot) (Amsterdam). Aangepast: Amsterdamse makelaars verwijderd, adapters worden automatisch geladen, testscript per adapter toegevoegd, check elk kwartier in plaats van elke vijf minuten.
+Gebaseerd op [wegjeroen/parari_bot](https://github.com/wegjeroen/parari_bot) (Amsterdam). Aangepast: Amsterdamse makelaars verwijderd, adapters worden automatisch geladen, testscript per adapter toegevoegd, Van der Huizen-adapter en huurtoeslag-inschatting in elke melding.
 
 ## Belangrijk om te weten
 
@@ -47,7 +47,7 @@ npm run search:remove -- "Utrecht tot 1500"
 
 1. Maak een **private** repository aan en push deze map ernaartoe.
 2. Voeg onder **Settings > Secrets and variables > Actions** de secrets `TELEGRAM_BOT_TOKEN` en `TELEGRAM_CHAT_ID` toe.
-3. Start de workflow één keer handmatig via de Actions-tab ("Run workflow"). Daarna draait hij elk kwartier.
+3. Start de workflow één keer handmatig via de Actions-tab ("Run workflow"). Daarna draait hij elke 5 minuten (voor zover GitHub geplande runs uitvoert).
 
 Let op: een private repo heeft op een gratis account een beperkt aantal Actions-minuten per maand. Controleer het verbruik onder Settings > Billing. GitHub zet scheduled workflows uit na 60 dagen zonder repo-activiteit; zolang er nieuwe woningen binnenkomen (commits naar `state/seen.json`) blijft hij actief.
 
