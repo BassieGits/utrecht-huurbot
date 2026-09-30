@@ -6,6 +6,7 @@ Persoonlijke notifier die huurwoningen in Utrecht zoekt voor een familielid en v
 - `src/index.js`: hoofdrun; loopt alle zoekopdrachten uit `config.json` af, vergelijkt met state, stuurt meldingen.
 - `src/adapters/<site>.js`: één scraper per bron. Exporteert `label` en `fetchListings(page, url)` die `{ id, title, address, price, features, url }[]` teruggeeft. Wordt automatisch geladen via `src/adapters/index.js`; bestandsnaam = `site`-waarde in config.
 - `src/test-adapter.js`: `npm run test:adapter -- <site> "<url>"` draait één adapter los, zonder state of Telegram. Gebruik dit altijd om een adapter te verifiëren.
+- `src/huurtoeslag.js`: leest voor elke nieuwe woning één keer de detailpagina en zet een inschatting (✅/❌/❔) of huurtoeslag mogelijk is (eigen ingang, keuken, toilet, badkamer) in de melding.
 - `src/notify.js`, `src/state.js`, `src/manage-searches.js`: generiek, niet aanpassen tenzij gevraagd.
 
 ## Werkafspraken

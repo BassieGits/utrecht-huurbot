@@ -22,6 +22,9 @@ async function sendTelegramMessage(searchName, sourceLabel, listing) {
   if (listing.features && listing.features.length) {
     lines.push(escapeHtml(listing.features.join(' · ')));
   }
+  if (listing.huurtoeslag) {
+    lines.push(escapeHtml(listing.huurtoeslag));
+  }
   lines.push(listing.url);
 
   const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {

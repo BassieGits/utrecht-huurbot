@@ -7,6 +7,7 @@ const { chromium } = require('playwright');
 const { loadState, saveState } = require('./state');
 const { sendTelegramMessage } = require('./notify');
 const { loadAdapters } = require('./adapters');
+const { assessHuurtoeslag, fetchDetailText } = require('./huurtoeslag');
 
 const ADAPTERS = loadAdapters();
 
@@ -78,7 +79,14 @@ async function run() {
       } else if (newListings.length > 0) {
         console.log(`${newListings.length} nieuwe woning(en) gevonden voor "${search.name}".`);
         for (const listing of newListings) {
+          // Alleen voor nieuwe woningen: één keer de detailpagina lezen voor de huurtoeslag-inschatting.
+          const detailContext = await browser.newContext({ userAgent: USER_AGENT, locale: 'nl-NL' });
+          const detailText = await fetchDetailText(await detailContext.newPage(), listing.url);
+          await detailContext.close();
+          listing.huurtoeslag = assessHuurtoeslag(listing, detailText);
+          console.log(`  ${listing.title}: ${listing.huurtoeslag}`);
           await sendTelegramMessage(search.name, adapter.label || search.site, listing);
+          await new Promise((resolve) => setTimeout(resolve, 2000));
         }
       } else {
         console.log(`Geen nieuwe woningen voor "${search.name}".`);
