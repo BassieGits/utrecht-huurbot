@@ -1,0 +1,18 @@
+{
+  "name": "utrecht-huurbot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Checkt Pararius (en eventueel Utrechtse verhuurmakelaars) op nieuwe huurwoningen in Utrecht en stuurt een Telegram-melding bij elke nieuwe listing. Gebaseerd op wegjeroen/parari_bot.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "search:add": "node src/manage-searches.js add",
+    "search:list": "node src/manage-searches.js list",
+    "search:remove": "node src/manage-searches.js remove",
+    "test:adapter": "node src/test-adapter.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "playwright": "^1.47.0"
+  }
+}
