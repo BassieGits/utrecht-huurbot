@@ -27,19 +27,22 @@ async function sendTelegramMessage(searchName, sourceLabel, listing) {
   }
   lines.push(listing.url);
 
-  const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      chat_id: chatId,
-      text: lines.join('\n'),
-      parse_mode: 'HTML',
-    }),
-  });
+  // TELEGRAM_CHAT_ID mag meerdere ids bevatten, gescheiden door komma's (bijv. privéchat en groep).
+  for (const id of chatId.split(',').map((s) => s.trim()).filter(Boolean)) {
+    const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: id,
+        text: lines.join('\n'),
+        parse_mode: 'HTML',
+      }),
+    });
 
-  if (!response.ok) {
-    const body = await response.text();
-    console.error(`Telegram-melding mislukt (${response.status}): ${body}`);
+    if (!response.ok) {
+      const body = await response.text();
+      console.error(`Telegram-melding naar ${id} mislukt (${response.status}): ${body}`);
+    }
   }
 }
 
