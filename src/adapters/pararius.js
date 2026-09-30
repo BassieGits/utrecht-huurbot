@@ -1,7 +1,13 @@
 async function fetchListings(page, url) {
-  await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
-  await page.waitForSelector('h1', { timeout: 20000 });
-  await page.waitForTimeout(500);
+  // Niet op 'networkidle' wachten: trackers houden het netwerk bezig, vooral op CI-runners.
+  await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
+  try {
+    await page.waitForSelector('li.search-list__item--listing, .search-list__empty, h1', { timeout: 30000 });
+  } catch (err) {
+    const title = await page.title().catch(() => '?');
+    throw new Error(`Pagina niet geladen (titel: "${title}"): ${err.message}`);
+  }
+  await page.waitForTimeout(1000);
 
   return page.$$eval('li.search-list__item--listing', (items) =>
     items
