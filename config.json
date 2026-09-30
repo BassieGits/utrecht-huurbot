@@ -8,5 +8,10 @@
     "name": "Van der Huizen Utrecht tot 1000",
     "site": "vanderhuizen",
     "url": "https://www.vanderhuizen.com/huurwoningen?city[]=utrecht-1&price_to=1000"
+  },
+  {
+    "name": "SSH Utrecht tot 1000, vanaf 14 m2",
+    "site": "ssh",
+    "url": "https://www.sshxl.nl/nl/aanbod#stad=utrecht&max=1000&m2=14"
   }
 ]
